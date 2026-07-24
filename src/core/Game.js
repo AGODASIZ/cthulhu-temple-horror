@@ -36,7 +36,7 @@ export class Game {
     this.controls = new PointerLockControls(this.camera, this.renderer.domElement);
     this.scene.add(this.controls.getObject());
 
-    const ambient = new THREE.AmbientLight(0x0a0a14, 1.2);
+    const ambient = new THREE.AmbientLight(0x0a0a14, 2.0);
     this.scene.add(ambient);
 
     this.collision = new CollisionWorld();
