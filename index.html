@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>深淵神殿(仮)</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+      font-family: "Hiragino Sans", "Meiryo", sans-serif;
+    }
+    #app {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+    #crosshair {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      margin: -3px 0 0 -3px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      pointer-events: none;
+      z-index: 10;
+    }
+    #hud {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+    #keys {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: rgba(200, 160, 64, 0.9);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
+    #status {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.3s;
+    }
+    #status.warn { color: rgba(200, 120, 60, 0.9); }
+    #status.danger {
+      color: rgba(200, 40, 40, 0.95);
+      animation: pulse 0.8s infinite alternate;
+    }
+    @keyframes pulse {
+      from { opacity: 0.7; }
+      to { opacity: 1; }
+    }
+    #prompt {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.85rem;
+    }
+    #hint {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.7rem;
+    }
+    #vignette {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(80, 0, 0, 0.45) 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 5;
+    }
+    #vignette.active { opacity: 1; }
+    #overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #cfcfcf;
+      background: rgba(0, 0, 0, 0.82);
+      z-index: 20;
+      cursor: pointer;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+    #overlay-title {
+      font-weight: 400;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: #8a8a8a;
+    }
+    #overlay-body {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 2;
+      max-width: 420px;
+    }
+    #overlay-body small {
+      color: #555;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="crosshair"></div>
+    <div id="vignette"></div>
+    <div id="hud">
+      <div id="keys">印: 0 / 3</div>
+      <div id="status"></div>
+      <div id="prompt"></div>
+    </div>
+    <div id="hint">Esc: 一時停止</div>
+    <div id="overlay">
+      <div id="overlay-title">深淵神殿</div>
+      <div id="overlay-body">読み込み中…</div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
